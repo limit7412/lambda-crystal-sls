@@ -1,0 +1,20 @@
+service: serverlesshellocrystal
+
+custom:
+  defaultStage: dev
+  api_version: v0
+  common: common # serverless.ymlのバグ回避用
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: ap-northeast-1
+  stage: ${opt:stage, self:custom.defaultStage}
+
+functions:
+  hello_ruby:
+    handler: handler.hello_ruby
+    timeout: 300
+  hello_crystal:
+    handler: handler.hello_crystal
+    timeout: 300
