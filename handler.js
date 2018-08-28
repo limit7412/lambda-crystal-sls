@@ -23,3 +23,14 @@ module.exports.hello_crystal = (event, context, callback) => {
     callback(result);
   });
 };
+
+module.exports.build_elixir = (event, context, callback) => {
+  const child = exec('./buildfile/build_elixir ' + "'" + JSON.stringify(event) + "'");
+
+  child.stdout.on('data', (result) => {
+    callback(null,result);
+  });
+  child.stderr.on('data', (result) => {
+    callback(result);
+  });
+};
