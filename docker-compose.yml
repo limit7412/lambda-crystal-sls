@@ -8,10 +8,3 @@ services:
     volumes:
       - ./src:/src
       - ./buildfile:/buildfile
-  # build_elixir:
-  #   build: ./build_elixir
-  #   image: local/build_elixir
-  #   container_name: build_elixir
-  #   volumes:
-  #     - ./src:/src
-  #     - ./buildfile:/buildfile
