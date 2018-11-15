@@ -1,17 +1,17 @@
 version: '3'
 
 services:
-  # build_crystal:
-  #   build: ./build_crystal
-  #   image: local/build_crystal
-  #   container_name: build_crystal
-  #   volumes:
-  #     - ./src:/src
-  #     - ./buildfile:/buildfile
-  build_elixir:
-    build: ./build_elixir
-    image: local/build_elixir
-    container_name: build_elixir
+  build_crystal:
+    build: ./build_crystal
+    image: local/build_crystal
+    container_name: build_crystal
     volumes:
       - ./src:/src
       - ./buildfile:/buildfile
+  # build_elixir:
+  #   build: ./build_elixir
+  #   image: local/build_elixir
+  #   container_name: build_elixir
+  #   volumes:
+  #     - ./src:/src
+  #     - ./buildfile:/buildfile
