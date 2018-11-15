@@ -13,9 +13,9 @@ provider:
   profile: qazx7412
 
 functions:
-  hello_ruby:
-    handler: handler.hello_ruby
-    timeout: 300
   hello_crystal:
     handler: handler.hello_crystal
-    timeout: 300
+    events:
+      - http:
+          path: test
+          method: post
