@@ -6,8 +6,11 @@ module.exports.hello_ruby = (event, context, callback) => {
   exec('./traveling-ruby/bin/ruby ./src/hello_ruby.rb ' + "'" + JSON.stringify(event) + "'", (error, stdout, stderr) => {
     if (error) {
       callback(error);
+    } else if (stderr) {
+      callback(stderr);
     }
-    callback(stderr,stdout);
+
+    callback(null,stdout);
   });
 };
 
