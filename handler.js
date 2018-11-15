@@ -14,8 +14,7 @@ module.exports.hello_ruby = (event, context, callback) => {
 };
 
 module.exports.hello_crystal = (event, context, callback) => {
-  // const child = exec('./buildfile/hello_crystal ' + "'" + JSON.stringify(event) + "'");
-  const child = exec('./build.sh');
+  const child = exec('./buildfile/hello_crystal ' + "'" + JSON.stringify(event) + "'");
 
   child.stdout.on('data', (result) => {
     callback(null,result);
