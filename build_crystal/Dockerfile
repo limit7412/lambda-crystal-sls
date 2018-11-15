@@ -8,13 +8,8 @@ RUN yum -y install crystal | true
 RUN crystal -v
 
 WORKDIR /buildfile
-<<<<<<< Updated upstream
-CMD ["crystal","build","/src/hello_crystal.cr"]
-# CMD ["crystal","build","/src/hello_crystal.cr","--release"]
-=======
 # CMD ["crystal","build","/src/hello.cr"]
 CMD ["crystal","build","/src/hello_crystal.cr","--release"]
->>>>>>> Stashed changes
 # CMD ["crystal","build","/src/hello_crystal.cr","--cross-compile","'Linux x86_64'","--target","'x86_64-unknown-linux-gnu'"]
 
 # ENTRYPOINT [ "/bin/bash" ]
