@@ -9,6 +9,7 @@ RUN crystal -v
 
 WORKDIR /buildfile
 # CMD ["crystal","build","/src/hello.cr"]
-CMD ["crystal","build","/src/hello.cr","--release"]
+CMD ["crystal","build","/src/hello_crystal.cr","--release"]
+# CMD ["crystal","build","/src/hello_crystal.cr","--cross-compile","'Linux x86_64'","--target","'x86_64-unknown-linux-gnu'"]
 
 # ENTRYPOINT [ "/bin/bash" ]
