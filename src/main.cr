@@ -1,5 +1,6 @@
-stdin = STDIN.gets_to_end.split("\n")
+require "json"
 
-stdin.each do |e|
-  puts e
-end
+stdin = JSON.parse(STDIN.gets_to_end)
+
+p stdin["body"].to_json
+# raise "hage"
