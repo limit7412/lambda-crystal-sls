@@ -3,6 +3,6 @@ stg=$1
 
 ls $(pwd)/src/ |
 while read line; do
-  $(pwd)/build.sh $line
+  $(pwd)/build.sh $line || exit 1
 done &&
 sls deploy -s $stg
