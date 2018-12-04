@@ -1,4 +1,8 @@
-docker run --rm -v $(pwd):/src -w /src \
-           tjholowaychuk/up-crystal crystal build \
-           --link-flags -static -o buildfile/main src/main.cr &&\
-sls deploy
+stg=$1
+[ -n $stg ] && stg="dev"
+
+ls $(pwd)/src/ |
+while read line; do
+  $(pwd)/build.sh $line
+done &&
+sls deploy -s $stg

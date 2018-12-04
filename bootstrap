@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -euo pipefail
+
+EXEC="$LAMBDA_TASK_ROOT/buildfile/$_HANDLER"
+
+if [ ! -x "$EXEC" ]; then
+    ERROR="{\"errorMessage\" : \"$_HANDLER is not found.\", \"errorType\" : \"HandlerNotFoundException\"}"
+    curl -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/init/error"  -d "$ERROR"
+    exit 1
+fi
+
+$EXEC
