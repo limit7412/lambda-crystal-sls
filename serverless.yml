@@ -15,7 +15,7 @@ provider:
 
 functions:
   hello:
-    handler: handler/hello
+    handler: hello
     events:
       - http:
           path: test
