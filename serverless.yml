@@ -1,4 +1,4 @@
-service: serverlesshellocrystal
+service: serverless-crystal-sls
 
 custom:
   defaultStage: dev
@@ -7,15 +7,15 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: provided
   timeout: 300
   region: ap-northeast-1
   stage: ${opt:stage, self:custom.defaultStage}
   profile: qazx7412
 
 functions:
-  hello_crystal:
-    handler: handler.hello_crystal
+  hello:
+    handler: handler/hello
     events:
       - http:
           path: test
