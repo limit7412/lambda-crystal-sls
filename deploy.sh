@@ -1,5 +1,5 @@
 stg=$1
-[ -n $stg ] || stg="dev"
+[ "$stg" = "" ] && stg="dev"
 
 ls $(pwd)/src/ |
 while read line; do
