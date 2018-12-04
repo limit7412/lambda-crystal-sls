@@ -1,7 +1,7 @@
 require "./../runtime/handler"
 
 def hello(event)
-  context
+  event
 end
 
 lambda_handler(hello)
