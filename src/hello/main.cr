@@ -1,3 +1,7 @@
 require "./../runtime/handler"
 
-handler
+def hello(event)
+  context
+end
+
+lambda_handler(hello)
