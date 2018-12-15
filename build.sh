@@ -4,6 +4,6 @@ func=$1
 [ -f $(pwd)/src/$func/main.cr ] || exit 0
 
 docker run --rm -v $(pwd):/src -w /src \
-           tjholowaychuk/up-crystal crystal build \
+           jhass/crystal-build-x86_64 crystal build \
            --link-flags -static -o buildfile/$func src/$func/main.cr && \
 chmod +x src/$func
