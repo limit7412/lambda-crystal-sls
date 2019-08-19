@@ -30,4 +30,5 @@ macro lambda_handler(func)
   end
 end
 
+ENV["SSL_CERT_FILE"] = "/etc/pki/tls/cert.pem"
 Lambda.run
