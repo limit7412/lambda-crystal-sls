@@ -7,6 +7,7 @@ def hello(event)
     event["body"]
   rescue err
     LambdaError.alert err
+    raise err
   end
 end
 

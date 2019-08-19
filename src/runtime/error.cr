@@ -1,5 +1,4 @@
 require "json"
-require "./../runtime/webhook"
 
 module LambdaError
   extend self
@@ -17,9 +16,8 @@ module LambdaError
       attachments: [post],
     }
 
-    slack = WebHook.new "#{ENV["WEBHOOK_URL_ERR"]}"
-    slack.post body
-
-    raise error
+    HTTP::Client.post("#{ENV["FAILD_WEBHOOK_URL"]}",
+      body: body.to_json
+    )
   end
 end
