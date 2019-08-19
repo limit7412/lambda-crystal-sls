@@ -11,13 +11,23 @@ macro lambda_handler(func)
         event = JSON.parse(response.body)
         request_id = response.headers["Lambda-Runtime-Aws-Request-Id"]
 
-        body = {{ func }} event["body"]
+        begin
+          body = {{ func }} event
+          header = nil
+          url = "http://#{ENV["AWS_LAMBDA_RUNTIME_API"]}/2018-06-01/runtime/invocation/#{request_id}/response"
+        rescue err
+          body = {
+            msg: "Internal Lambda Error",
+            err: err.message
+          }
+          header = HTTP::Headers{"Lambda-Runtime-Function-Error-Type" => "Unhandled"}
+          url = "http://#{ENV["AWS_LAMBDA_RUNTIME_API"]}/2018-06-01/runtime/invocation/#{request_id}/error"
+        end
 
-        url : String = "http://#{ENV["AWS_LAMBDA_RUNTIME_API"]}/2018-06-01/runtime/invocation/#{request_id}/response"
-        HTTP::Client.post url, body: body.to_json
+        HTTP::Client.post url, headers: header, body: body.to_json
       end
     end
   end
 end
 
-Lambda.run()
+Lambda.run
