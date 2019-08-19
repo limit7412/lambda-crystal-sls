@@ -11,7 +11,7 @@ macro lambda_handler(func)
         event = JSON.parse(response.body)
         request_id = response.headers["Lambda-Runtime-Aws-Request-Id"]
 
-        body = {{ func }} event["body"]
+        body = {{ func }} event
 
         url : String = "http://#{ENV["AWS_LAMBDA_RUNTIME_API"]}/2018-06-01/runtime/invocation/#{request_id}/response"
         HTTP::Client.post url, body: body.to_json
@@ -20,4 +20,4 @@ macro lambda_handler(func)
   end
 end
 
-Lambda.run()
+Lambda.run
