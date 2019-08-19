@@ -3,7 +3,6 @@ service: serverless-crystal-sls
 custom:
   defaultStage: dev
   api_version: v0
-  common: common # serverless.ymlのバグ回避用
 
 provider:
   name: aws
@@ -12,6 +11,8 @@ provider:
   region: ap-northeast-1
   stage: ${opt:stage, self:custom.defaultStage}
   # profile: qazx7412
+  environment:
+    ${file(./env.yml)}
 
 functions:
   hello:
