@@ -3,13 +3,11 @@
 stg=$1
 [ "$stg" = "" ] && stg="dev"
 
-rm -rf ./buildfile
-mkdir ./buildfile
+[ -e bootstrap ] && sudo rm bootstrap
 
-cat ./serverless.yml |
-grep 'handler'       |
-awk '{print $2}'     |
-while read line; do
-    ./build.sh $line || exit 1
-done &&
+sudo docker run --rm -v $(pwd):/src -w /src      \
+jhass/crystal-build-x86_64 crystal build         \
+--link-flags -static -o bootstrap src/main.cr && \
+sudo chmod +x bootstrap                          || exit 1
+
 sls deploy -s $stg

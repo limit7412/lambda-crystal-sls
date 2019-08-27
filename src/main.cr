@@ -1,7 +1,7 @@
-require "./../runtime/handler"
-require "./../runtime/error"
+require "./runtime/handler"
+require "./runtime/error"
 
-Lambda.handler do |event|
+Lambda.handler "hello" do |event|
   begin
     # raise "死にました"
     event["body"]
