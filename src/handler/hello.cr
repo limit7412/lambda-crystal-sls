@@ -1,7 +1,7 @@
 require "./../runtime/handler"
 require "./../runtime/error"
 
-def hello(event)
+Lambda.handler do |event|
   begin
     # raise "死にました"
     event["body"]
@@ -10,5 +10,3 @@ def hello(event)
     raise err
   end
 end
-
-lambda_handler(hello)
