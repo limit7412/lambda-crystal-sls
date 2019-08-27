@@ -5,6 +5,6 @@ jspm_packages
 # Serverless directories
 .serverless
 
-buildfile
+bootstrap
 lib
 env.yml

@@ -4,7 +4,9 @@ require "http/client"
 module Lambda
   extend self
 
-  def handler
+  def handler(name : String)
+    return if name != ENV["_HANDLER"]
+
     ENV["SSL_CERT_FILE"] = "/etc/pki/tls/cert.pem"
 
     while true
