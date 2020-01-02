@@ -18,10 +18,12 @@ module Lambda
         body = yield event
         header = nil
         url = "http://#{ENV["AWS_LAMBDA_RUNTIME_API"]}/2018-06-01/runtime/invocation/#{request_id}/response"
-      rescue err
+      rescue
         body = {
-          msg: "Internal Lambda Error",
-          err: err.message,
+          statusCode: 500,
+          body: {
+            msg: "Internal Lambda Error",
+          }.to_s,
         }
         header = HTTP::Headers{"Lambda-Runtime-Function-Error-Type" => "Unhandled"}
         url = "http://#{ENV["AWS_LAMBDA_RUNTIME_API"]}/2018-06-01/runtime/invocation/#{request_id}/error"
