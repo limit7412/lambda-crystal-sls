@@ -21,9 +21,9 @@ module Lambda
       rescue
         body = {
           statusCode: 500,
-          body: {
-            msg: "Internal Lambda Error",
-          }.to_s,
+          body:       {
+            "msg": "Internal Lambda Error",
+          }.to_json,
         }
         header = HTTP::Headers{"Lambda-Runtime-Function-Error-Type" => "Unhandled"}
         url = "http://#{ENV["AWS_LAMBDA_RUNTIME_API"]}/2018-06-01/runtime/invocation/#{request_id}/error"

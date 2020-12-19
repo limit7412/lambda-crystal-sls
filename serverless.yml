@@ -1,23 +1,23 @@
-service: serverless-crystal-sls
+service: lambda-crystal-sls
 
 custom:
+  defaultAccount: dummy
+  defaultDigest: dummy
   defaultStage: dev
-  api_version: v0
 
 provider:
   name: aws
   runtime: provided
-  timeout: 300
+  timeout: 20
   region: ap-northeast-1
   stage: ${opt:stage, self:custom.defaultStage}
-  # profile: qazx7412
-  environment:
-    ${file(./env.yml)}
+  # environment:
+  #   ${file(./env.yml)}
 
 functions:
   hello:
-    handler: hello
+    image: ${opt:account, self:custom.defaultAccount}.dkr.ecr.${self:provider.region}.amazonaws.com/lambda_crystal_sls_${self:provider.stage}@${opt:digest, self:custom.defaultDigest}
     events:
       - http:
           path: test
-          method: post
+          method: get
