@@ -1,0 +1,6 @@
+name: lambda-sls
+version: 0.1.0
+
+targets:
+  bootstrap:
+    main: src/main.cr
