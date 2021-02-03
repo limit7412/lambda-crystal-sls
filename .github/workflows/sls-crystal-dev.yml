@@ -60,7 +60,7 @@ jobs:
 
     - name: build
       env:
-        REPOSITORY: lambda_crystal_sls_dev
+        REPOSITORY: build-image
       run: |
         docker build -t $REPOSITORY .
         docker run --name $REPOSITORY -d $REPOSITORY /bin/sh
