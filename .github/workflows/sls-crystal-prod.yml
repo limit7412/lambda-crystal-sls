@@ -69,4 +69,4 @@ jobs:
     - name: deploy
       env:
         ACCOUNT_ID: ${{ steps.get-aws-account.outputs.ACCOUNT_ID }}
-      run: sls deploy --stage dev > /dev/null
+      run: sls deploy --stage prod > /dev/null
