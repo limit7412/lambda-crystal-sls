@@ -26,11 +26,11 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-northeast-1
 
-    - name: get aws account id
-      id: get-aws-account
-      run: |
-        echo "::add-mask name=ACCOUNT_ID::$(aws sts get-caller-identity | jq -r .Account)"
-        echo "::set-output name=ACCOUNT_ID::$(aws sts get-caller-identity | jq -r .Account)"
+    # - name: get aws account id
+    #   id: get-aws-account
+    #   run: |
+    #     echo "::add-mask name=ACCOUNT_ID::$(aws sts get-caller-identity | jq -r .Account)"
+    #     echo "::set-output name=ACCOUNT_ID::$(aws sts get-caller-identity | jq -r .Account)"
 
     # - name: login ecr
     #   id: login-ecr
@@ -67,6 +67,4 @@ jobs:
         docker cp $REPOSITORY:/work/bootstrap .
 
     - name: deploy
-      env:
-        ACCOUNT_ID: ${{ steps.get-aws-account.outputs.ACCOUNT_ID }}
       run: sls deploy --stage dev > /dev/null
