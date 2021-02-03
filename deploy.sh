@@ -23,6 +23,6 @@ docker build -t $container .
 
 docker run --name $container -d $container /bin/sh
 docker cp $container:/work/bootstrap .
-docker stop $container
+docker rm $container
 
 sls deploy --stage $stg
