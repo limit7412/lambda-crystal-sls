@@ -1,7 +1,7 @@
-require "./runtime/handler"
+require "./runtime/lambda"
 require "./runtime/error"
 
-Lambda.handler "hello" do |event|
+Serverless::Lambda.handler "hello" do |event|
   begin
     {
       statusCode: 200,
@@ -10,8 +10,8 @@ Lambda.handler "hello" do |event|
       }.to_json,
     }
   rescue err
-    # LambdaError.alert err
-    puts err.to_s
+    # Serverless::Alert.post err
+    Serverless::Lambda.print_log err.to_s
     raise err
   end
 end
