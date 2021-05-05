@@ -35,8 +35,10 @@ module Serverless
     end
 
     def print_log(log : String)
-      puts `echo '#{log}'`
-      STDOUT.flush
+      log.split(//).each_slice(50000) do |line|
+        puts `echo '#{line.join.gsub(/(\r\n|\r|\n|\f)/, "")}'`
+        STDOUT.flush
+      end
     end
   end
 end
