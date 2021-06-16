@@ -10,14 +10,20 @@ provider:
   runtime: provided
   timeout: 20
   region: ap-northeast-1
+  ecr:
+    images:
+      appImage:
+        path: ./
   stage: ${opt:, self:custom.defaultStage}
   # environment:
   #   ${file(./env.yml)}
 
 functions:
   hello:
-    # image: ${opt:account, self:custom.defaultAccount}.dkr.ecr.${self:provider.region}.amazonaws.com/lambda_crystal_sls_${self:provider.stage}@${opt:digest, self:custom.defaultDigest}
-    handler: hello
+    image:
+      name: appImage
+      command:
+        - hello
     events:
       - http:
           path: test
