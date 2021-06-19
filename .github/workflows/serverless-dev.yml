@@ -1,4 +1,4 @@
-name: serverless-deploy-dev
+name: serverless-dev
 
 on: pull_request
 
