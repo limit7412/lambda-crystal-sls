@@ -15,7 +15,7 @@ provider:
       appImage:
         path: ./
         platform: linux/amd64
-  stage: ${opt:, self:custom.defaultStage}
+  stage: ${opt:stage, self:custom.defaultStage}
   # environment:
   #   ${file(./env.yml)}
 
