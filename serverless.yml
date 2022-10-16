@@ -29,3 +29,12 @@ functions:
       - http:
           path: test
           method: get
+  world:
+    image:
+      name: appImage
+      command:
+        - world
+    events:
+      - http:
+          path: test
+          method: post
