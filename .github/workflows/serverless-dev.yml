@@ -12,7 +12,7 @@ jobs:
           echo "::add-mask::${{ secrets.API_URL_MASK }}"
 
       - name: setup node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
 
       - name: install sls
         run: npm i -g serverless
