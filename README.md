@@ -5,5 +5,3 @@
 
 ### 参考にした
   - https://www.m3tech.blog/entry/aws-lambda-custom-runtime
-
-## GAテスト用コミット
