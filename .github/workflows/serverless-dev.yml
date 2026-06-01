@@ -30,6 +30,9 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ap-northeast-1
 
+      - name: install plugins
+        run: npm install
+
       - name: deploy
         run: sls deploy --stage dev
         env:
