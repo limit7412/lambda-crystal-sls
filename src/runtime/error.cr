@@ -1,4 +1,5 @@
 require "json"
+require "http/client"
 
 module Serverless
   module Alert
@@ -9,7 +10,7 @@ module Serverless
         fallback: ENV["FAILD_FALLBACK"],
         pretext:  "<@#{ENV["SLACK_ID"]}> #{ENV["FAILD_FALLBACK"]}",
         title:    error.message,
-        text:     error.backtrace.join("\n"),
+        text:     error.backtrace?.try(&.join('\n')),
         color:    "#EB4646",
         footer:   "function-name",
       }

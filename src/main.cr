@@ -10,10 +10,10 @@ Serverless::Lambda.handler "hello" do |_|
         msg: "さよなら透明だった僕たち",
       }.to_json,
     }
-  rescue err
-    # Serverless::Alert.post err
-    Serverless::Lambda.print_log err.to_s
-    raise err
+  rescue error
+    # Serverless::Alert.post error
+    Serverless::Lambda.print_log error.to_s
+    raise error
   end
 end
 
@@ -26,9 +26,9 @@ Serverless::Lambda.handler "world" do |event|
         event: JSON.parse(event["body"].to_s),
       }.to_json,
     }
-  rescue err
-    # Serverless::Alert.post err
-    Serverless::Lambda.print_log err.to_s
-    raise err
+  rescue error
+    # Serverless::Alert.post error
+    Serverless::Lambda.print_log error.to_s
+    raise error
   end
 end
