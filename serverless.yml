@@ -12,9 +12,15 @@ custom:
       # 静的バイナリを得るため、linux/arm64 を明示して Docker でビルドする。
       # chmod はコンテナ内(root)で実行する。Linux ランナーでは生成物が
       # root 所有になり、コンテナ外の runner ユーザーでは chmod できないため。
+      #
+      # glibc で静的リンクしたバイナリは provided.al2023 上で外部 HTTPS 通信に
+      # 失敗する(OpenSSL の初期化エラー)ため、api.github.com / hooks.slack.com
+      # へ到達できない。musl(Alpine)ベースで静的リンクすると外部通信が復旧する。
+      # 併せて静的リンクに必要なライブラリ(OpenSSL / zlib / libevent)を
+      # apk add --no-cache で明示導入し、ベースイメージ更新時のリンク失敗を防ぐ。
       'before:package:createDeploymentArtifacts': |
-        docker run --rm --platform linux/arm64 -v "$PWD":/work -w /work crystallang/crystal:latest \
-          sh -c "crystal build --link-flags -static -o bootstrap src/main.cr && chmod +x bootstrap"
+        docker run --rm --platform linux/arm64 -v "$PWD":/work -w /work crystallang/crystal:latest-alpine \
+          sh -c "apk add --no-cache openssl-libs-static zlib-static libevent-static && crystal build --link-flags -static -o bootstrap src/main.cr && chmod +x bootstrap"
 
 provider:
   name: aws
